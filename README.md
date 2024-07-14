@@ -19,4 +19,4 @@ We were able to build a database to store numerical aspects of distracted driver
 We tried exploring explainable AI and assist the drivers.<br>
 
 <b>Block diagram</b>
-![Sample Image](image.jpg)
+![Sample Image](utils/image.jpg)
