@@ -26,7 +26,7 @@ We tried exploring explainable AI and assist the drivers.<br>
 
 ### Step 1: Clone the Repository
 \`\`\`bash
-git clone https://github.com/yourusername/satark.git
+git clone https://github.com/kramachandrashenoy/satark.git
 cd satark
 \`\`\`
 
