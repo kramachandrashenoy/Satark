@@ -28,7 +28,7 @@ We tried exploring explainable AI and assist the drivers.<br>
 ```bash
 git clone https://github.com/yourusername/satark.git
 cd satark
-
+```bash
 Step 2: Set Up the Python Environment
 1. Create a virtual environment (optional but recommended):
 
