@@ -70,22 +70,6 @@ The application will start on \`http://127.0.0.1:5000/\`.
 ### Step 7: Access the Application
 Open a web browser and go to \`http://127.0.0.1:5000/\` to access the main interface.
 
-## Directory Structure
-\`\`\`
-satark/
-├── static/
-│   └── final.html
-├── templates/
-│   └── index.html
-├── ultrasonic_sensor.ino
-├── shape_predictor_68_face_landmarks.dat
-├── drowiness_new7.h5
-├── alarm.mp3
-├── buzzer2-6109.mp3
-├── requirements.txt
-└── main.py
-\`\`\`
-
 ## APIs
 ### Video Feed
 - **Endpoint:** \`/video_feed\`
