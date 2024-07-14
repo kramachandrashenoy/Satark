@@ -17,3 +17,6 @@ We used ultra-sonic sensors to detect any nearby objects and give an alert to th
 We were sucessful in fetching data from google APIs and recommend nearby hotels for the driver.<br>
 We were able to build a database to store numerical aspects of distracted drivers and analyse the data through pie-charts.<br>
 We tried exploring explainable AI and assist the drivers.<br>
+
+<b>Block diagram</b>
+![Sample Image](image.jpg)
