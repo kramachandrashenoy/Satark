@@ -21,3 +21,26 @@ We tried exploring explainable AI and assist the drivers.<br>
 <b>Block diagram</b>
 ![Sample Image](utils/image.jpg)
 
+
+## Installation and Setup
+
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/yourusername/satark.git
+cd satark
+
+Step 2: Set Up the Python Environment
+1. Create a virtual environment (optional but recommended):
+
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+
+2. Install the required Python packages:
+
+pip install -r requirements.txt
+
+Step 3: Configure MongoDB
+Set up a MongoDB Atlas account if you don't already have one.
+Update the MongoDB connection string in the main.py file:
+
+client = MongoClient("your_mongodb_connection_string")
