@@ -55,7 +55,6 @@ cd satark
 3. **Ensure the correct serial port** is set in the \`main.py\` file:
     \`\`\`python
     serial_port = 'COM6'  # For Windows
-    # serial_port = '/dev/ttyACM0'  # For Linux/macOS
     \`\`\`
 
 ### Step 5: LocationIQ API Configuration
