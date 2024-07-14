@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satark- A driver safety app</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .left, .right {
+            display: flex;
+            flex-direction: column;
+        }
+        .right {
+            width: 70%;
+        }
+        .left > .top {
+            height: 65%;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+        }
+        .right > .top, .right > .bottom {
+            flex: 1;
+            display: flex;
+        }
+        .right > .top > .left {
+            width: 40%;
+            border: 1px solid #000;
+        }
+        .right > .top > .right {
+            width: 60%;
+            border: 1px solid #000;
+        }
+        .right > .bottom > .left {
+            width: 45%;
+            border: 1px solid #000;
+        }
+        .right > .bottom > .right {
+            width: 55%;
+            border: 1px solid #000;
+        }
+        .left {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.left .top {
+    height: 65%;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.left .bottom {
+    height: 35%;
+    border: 1px solid #000;
+    background-color: #ec4242;
+}
+
+.left .top .reading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.left .top img {
+    width: 100px;
+    height: auto;
+}
+#carIcon{
+    width: 300px;
+    height: 250px;
+}
+        
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="top">
+                <div class="reading-container">
+                    <div id="frontReading" style="padding-bottom: 20px;">-- cm</div>
+                    <div class="left-top-middle">
+                        <img src="data:image/jpeg;base64,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" alt="Car" id="carIcon">
+                    </div>
+                    <div id="rearReading" style="padding-top: 20px;">-- cm</div>
+                </div>
+            </div>
+            <div class="bottom" id="majorityMessage" style="text-align: center; padding-top: 65px; padding-left: 10px; padding-right: 10px; font-size: medium; font-weight: bold; font-family: 'Times New Roman', Times, serif;"></div>
+        </div>        
+        <div class="right">
+            <div class="top">
+                <div class="left" style="background-color: #ffffff;">
+                    <canvas id="myPieChart2" style="width: 90%; height: 90%;"></canvas>
+                </div>
+                <div class="right">
+                    <iframe id="video_frame" src="/video_feed" frameborder="0" style="height:100%;" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="left" style="background-color: #ffffff;">
+                    <canvas id="myPieChart" style="width: 90%; height: 90%; background-color:rgb(255, 255, 255);"></canvas>
+                </div>
+                <div class="right" id="resultsContainer" style="padding-top: 50px;">
+                    <button id="fetchDataButton" type="submit" style="
+                        font-size: 16px;
+                        background-color: #007bff;
+                        color: #fff;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease;
+                        display: inline-block;
+                        padding: 10px 20px;
+                        line-height: 1; /* Ensure the button height adjusts correctly */">
+                        Find Your Nearest Helper
+                    </button>
+                </div>
+                
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <script>
+        let myPieChart;
+
+        function updatePieChart() {
+            fetch('/current_driving_data?id=1')  // Change ID as needed
+                .then(response => response.json())
+                .then(data => {
+                    // Calculate total count
+                    const currentTotal = data.current_drowsiness_count +
+                                        data.current_movement_count +
+                                        data.current_objects_count;
+
+                    // Prepare data for the pie chart
+                    const labels = ['Drowsiness', 'Movement', 'Objects'];
+                    const values = [
+                        data.current_drowsiness_count || 0,
+                        data.current_movement_count || 0,
+                        data.current_objects_count || 0
+                    ];
+
+                    // Calculate percentages
+                    const percentages = values.map(value => ((value / currentTotal) * 100).toFixed(2) + '%');
+
+                    // Update pie chart data
+                    if (myPieChart) {
+                        myPieChart.data.labels = labels.map((label, index) => `${label} (${percentages[index]})`);
+                        myPieChart.data.datasets[0].data = values;
+                        myPieChart.update();
+                    } else {
+                        // Render pie chart using Chart.js
+                        const ctx = document.getElementById('myPieChart').getContext('2d');
+                        myPieChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: labels.map((label, index) => `${label} (${percentages[index]})`),
+                                datasets: [{
+                                    label: 'Current Driving Data',
+                                    data: values,
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.7)',   // Drowsiness color
+                                        'rgba(54, 162, 235, 0.7)',  // Movement color
+                                        'rgba(255, 206, 86, 0.7)'   // Objects color
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                responsive: false,  // Disable responsiveness
+                                plugins: {
+                                    legend: {
+                                        position: 'top',
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: `Current Driving Data Distribution (Total: ${currentTotal})`
+                                    }
+                                }
+                            }
+                        });
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Update pie chart every 5 seconds
+        setInterval(updatePieChart, 5000);
+
+        // Initial update on page load
+        document.addEventListener('DOMContentLoaded', updatePieChart);
+    </script>
+
+<script>
+    let myPieChart2;
+
+    function updatePieChart2() {
+        fetch('/total_driving_data?id=1')  // Change ID as needed
+            .then(response => response.json())
+            .then(data => {
+                // Calculate total count
+                const allTimeTotal = data.drowsiness_count +
+                                    data.movement_count +
+                                    data.objects_count;
+
+                // Prepare data for the pie chart
+                const labels = ['Drowsiness', 'Movement', 'Objects'];
+                const values = [
+                    data.drowsiness_count || 0,
+                    data.movement_count || 0,
+                    data.objects_count || 0
+                ];
+
+                // Calculate percentages
+                const percentages = values.map(value => ((value / allTimeTotal) * 100).toFixed(2) + '%');
+
+                // Render pie chart using Chart.js
+                const ctx = document.getElementById('myPieChart2').getContext('2d');
+                myPieChart2 = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels.map((label, index) => `${label} (${percentages[index]})`),
+                        datasets: [{
+                            label: 'All time stats',
+                            data: values,
+                            backgroundColor: [
+                                'rgba(167, 201, 87, 0.7)',   // Drowsiness color
+                                'rgba(106, 153, 78, 0.7)',  // Movement color
+                                'rgba(56, 102, 65, 0.7)'   // Objects color
+                            ],
+                            borderColor: [
+                                'rgba(167, 201, 87, 1)',   // Drowsiness color
+                                'rgba(106, 153, 78, 1)',  // Movement color
+                                'rgba(56, 102, 65, 1)'   // Objects color
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: false,  // Disable responsiveness
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: `All time stats (Total: ${allTimeTotal})`
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    // Initial update on page load
+    document.addEventListener('DOMContentLoaded', updatePieChart2);
+</script>
+
+<script>
+    const majorityMessage = document.getElementById('majorityMessage');
+    function displayMajorityMessage() {
+            fetch('/current_driving_data?id=1')  // Change ID as needed
+                .then(response => response.json())
+                .then(data => {
+                    const { current_drowsiness_count, current_movement_count, current_objects_count } = data;
+
+                    if (current_drowsiness_count > current_movement_count && current_drowsiness_count > current_objects_count) {
+                        majorityMessage.textContent = 'Your attention seems to be declining, indicating signs of drowsiness. For your safety and the safety of others: Pull over to a safe location. Take a short break and rest.Consider switching drivers, if possible. Safety comes first. Stay alert and stay safe!';
+                    } else if (current_movement_count > current_drowsiness_count && current_movement_count > current_objects_count) {
+                        majorityMessage.textContent = 'Your movement inside the vehicle has been detected. For your safety and the safety of others: Keep both hands on the wheel. Maintain proper driving posture.Stay focused on the road. Safety comes first. Please drive responsibly!';
+                    } else if (current_objects_count > current_drowsiness_count && current_objects_count > current_movement_count) {
+                        majorityMessage.textContent = 'It appears that you are using objects while driving. For your safety and the safety of others: Put down any objects immediately. Keep both hands on the wheel.Stay focused on the road. Safety comes first. Avoid distractions and drive responsibly!';
+                    } else {
+                        majorityMessage.textContent = 'No clear majority';
+                    }
+
+                    majorityMessage.classList.add('active');
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+
+        // Start displaying majority message after 15 seconds and repeat every 10 seconds
+        setTimeout(() => {
+                    displayMajorityMessage();
+                    setInterval(displayMajorityMessage, 10000); // Repeat every 10 seconds
+                }, 15000);
+
+</script>
+
+<script>
+    // Fetch ultrasonic data periodically
+    function fetchUltrasonicData() {
+            fetch('/ultrasonic')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('frontReading').innerText = `Front Distance: ${data.distance1} cm`;
+                    document.getElementById('rearReading').innerText = `Back Distance: ${data.distance2} cm`;
+                })
+                .catch(error => {
+                    console.error('Error fetching ultrasonic data:', error);
+                });
+        }
+        setInterval(fetchUltrasonicData, 1000); // Fetch ultrasonic data every second
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fetchDataButton = document.getElementById('fetchDataButton');
+    
+        fetchDataButton.addEventListener('click', function() {
+            // Make an AJAX request to your Flask server
+            fetch('/fetch_nearby_places')  // Adjust the endpoint as per your Flask route
+                .then(response => response.json())
+                .then(data => {
+                    // Process the JSON response
+                    console.log('Received data:', data);
+                    
+                    // Assuming data structure: { "hotel": [...], "restaurant": [...], "hospital": [...] }
+                    if (data && Object.keys(data).length > 0) {
+                        const resultsContainer = document.getElementById('resultsContainer');
+                        resultsContainer.innerHTML = '';  // Clear previous results
+                        
+                        // Iterate over categories
+                        for (const category in data) {
+                            if (data.hasOwnProperty(category)) {
+                                const places = data[category];
+                                
+                                // Create a heading for each category
+                                const categoryHeading = document.createElement('h2');
+                                categoryHeading.textContent = category.charAt(0).toUpperCase() + category.slice(1) + 's:';
+                                resultsContainer.appendChild(categoryHeading);
+                                
+                                // Create a list for places in the category
+                                const placesList = document.createElement('ul');
+                                
+                                // Iterate over places
+                                places.forEach(place => {
+                                    // Create list item for each place
+                                    const placeItem = document.createElement('li');
+                                    placeItem.textContent = `${place.name} (${place.distance_km} km)`;
+                                    placesList.appendChild(placeItem);
+                                });
+                                
+                                // Append the places list to results container
+                                resultsContainer.appendChild(placesList);
+                                
+                            }
+                        }
+                    } else {
+                        console.log('No data received.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    // Handle errors gracefully
+                });
+        });
+    });
+    </script>    
+</body>
+</html>
