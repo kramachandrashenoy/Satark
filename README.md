@@ -1,3 +1,4 @@
+# SATARK (STAY SAFE)
 # AI assisted distracted driver detection system
 
 Objective: To design and implement a system that uses AI algorithms to detect distracted driving behaviours in real-time.
@@ -25,46 +26,47 @@ We tried exploring explainable AI and assist the drivers.<br>
 ## Installation and Setup
 
 ### Step 1: Clone the Repository
-\`\`\`bash
-git clone https://github.com/kramachandrashenoy/satark.git
+
+```sh
+git clone https://github.com/kramachandrashenoy/Satark.git
 cd satark
-\`\`\`
+```
 
 ### Step 2: Set Up the Python Environment
 1. **Create a virtual environment (optional but recommended):**
-    \`\`\`bash
+    ```python
     python -m venv venv
     source venv/bin/activate  # On Windows use \`venv\Scripts\activate\`
-    \`\`\`
+    ```
 
 2. **Install the required Python packages:**
-    \`\`\`bash
+    ```sh
     pip install -r requirements.txt
-    \`\`\`
+    ```
 
 ### Step 3: Configure MongoDB
-1. **Set up a MongoDB Atlas account** if you don't already have one.
+1. **Set up a MongoDB Atlas account** If you don't already have one.
 2. **Update the MongoDB connection string** in the \`main.py\` file:
-    \`\`\`python
+    ```python
     client = MongoClient("your_mongodb_connection_string")
-    \`\`\`
+    ```
 
 ### Step 4: Set Up the Ultrasonic Sensors (Arduino)
 1. **Connect the ultrasonic sensors** to your Arduino as per the provided code.
 2. **Upload the provided Arduino code** (\`ultrasonic_sensor.ino\`) to your Arduino board using the Arduino IDE.
 3. **Ensure the correct serial port** is set in the \`main.py\` file:
-    \`\`\`python
+    ```python
     serial_port = 'COM6'  # For Windows
-    \`\`\`
+    ```
 
 ### Step 5: LocationIQ API Configuration
 1. **Get your API key** from [LocationIQ](https://locationiq.com/).
 2. **Update the \`locationiq_api_key\` variable** in the \`main.py\` file with your API key.
 
 ### Step 6: Run the Flask Application
-\`\`\`bash
+```bash
 python main.py
-\`\`\`
+```
 The application will start on \`http://127.0.0.1:5000/\`.
 
 ### Step 7: Access the Application
